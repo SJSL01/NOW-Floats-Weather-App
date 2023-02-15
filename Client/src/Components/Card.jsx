@@ -6,7 +6,7 @@ import redHeart from "../assets/redHeart.png"
 import { useContext, useState } from "react"
 import DataContext from "../Context/DataContext"
 
-export default function Card({ weatherInfo }) {
+export default function Card({ weatherInfo, handleFav }) {
 
 
     const { theme } = useContext(DataContext)
@@ -14,14 +14,18 @@ export default function Card({ weatherInfo }) {
 
     const [isFav, setIsFav] = useState(false)
 
+
     const Savefav = () => {
+        setIsFav(!isFav)
         if (localStorage.getItem(weatherInfo.name)) {
             localStorage.removeItem(weatherInfo.name)
-            setIsFav(false)
+            // setIsFav(false)
         } else {
-            localStorage.setItem((weatherInfo.name), weatherInfo.coord.lat, weatherInfo.coord.lon)
-            setIsFav(true)
+            localStorage.setItem((weatherInfo.name), [weatherInfo.coord.lat, weatherInfo.coord.lon])
+            // setIsFav(true)
         }
+        setIsFav(!isFav)
+
     }
     return (
         <>
@@ -48,7 +52,13 @@ export default function Card({ weatherInfo }) {
 
                         <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
 
-                            <img src={isFav ? redHeart : whiteHeart} onClick={() => { Savefav() }} />
+
+                            <img src={localStorage.getItem(weatherInfo.name) ? redHeart : whiteHeart}
+                                onClick={() => { Savefav() }} />
+
+
+
+
 
                             <Icon className="icon"
                                 src={`https://openweathermap.org/img/w/${weatherInfo?.weather[0]?.icon}.png`}
@@ -96,9 +106,9 @@ export default function Card({ weatherInfo }) {
 
 const Place = styled.span`
     font-weight:1000;
-    font-size:4rem;
+    font-size:3.5rem;
     @media (width<500px) {
-        font-size:2.3rem;
+        font-size:2rem;
           }
 `
 

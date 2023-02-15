@@ -1,7 +1,3 @@
-nav div a {
-    text-decoration: none;
-    color: black;
-}
 
 nav div {
     display: flex;
@@ -17,9 +13,11 @@ nav div {
 }
 
 .active {
-    background-color: rgb(251, 115, 115);
+    background-color: rgb(255, 139, 139);
+    transition: 0.5s;
 }
 
 .inactive {
-    background-color: rgba(251, 115, 115, 0.415);
+    background-color: rgba(251, 115, 115, 0.158);
+    transition: 0.5s;
 }

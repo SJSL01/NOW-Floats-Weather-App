@@ -5,16 +5,18 @@ import DataContext from '../Context/DataContext'
 
 import "../Styles/Home.css"
 import styled from 'styled-components'
+import { useLocation } from 'react-router-dom'
 
 export default function Home() {
 
 
-    const { searchResults, theme, weatherInfo, getWeatherInfo } = useContext(DataContext)
+    const { searchResults, theme, weatherInfo, getWeatherInfo, select } = useContext(DataContext)
 
-
+    const location = useLocation()
 
     const [error, setError] = useState(false)
 
+    const selected = location.state
 
 
     useEffect(() => {
@@ -31,7 +33,12 @@ export default function Home() {
     }, [])
 
     const getPosition = async (position) => {
-        const coords = ([`${position.coords.latitude}`, `${position.coords.longitude}`])
+        let coords;
+        if (selected) {
+            coords = selected.data
+        } else {
+            coords = ([`${position.coords.latitude}`, `${position.coords.longitude}`])
+        }
         await getWeatherInfo(coords)
     }
 
@@ -39,7 +46,6 @@ export default function Home() {
         <>
             <div style={{ position: "absolute", width: "90%", zIndex: "5" }}>
                 {searchResults && searchResults.map(res => {
-                    console.log(res);
                     return (
                         <Place style={theme ? { background: "rgba(128, 128, 128, 0.744)", color: "white" } : {}} key={crypto.randomUUID()} onClick={() => { getWeatherInfo([res.lat, res.lon]) }}>{res.name},{res.country}</Place>
                     )
@@ -50,7 +56,6 @@ export default function Home() {
                 className={theme ? 'cardContainer light' : `cardContainer dark`}
                 initial={{ width: "50%" }}
                 animate={{ width: "100%" }}
-                exit={{ x: window.innerWidth }}
             >
 
 

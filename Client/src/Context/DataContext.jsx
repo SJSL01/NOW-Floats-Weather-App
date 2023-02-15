@@ -10,6 +10,7 @@ export const DataContextProvider = ({ children }) => {
     const [query, setQuery] = useState("")
     const [searchResults, setSearchResults] = useState([])
 
+
     const [theme, setTheme] = useState(false)
 
 
@@ -30,6 +31,7 @@ export const DataContextProvider = ({ children }) => {
     }
 
 
+
     useEffect(() => {
 
         if (query == "" || query == null) {
@@ -39,9 +41,8 @@ export const DataContextProvider = ({ children }) => {
         if (query != "" && query != null) {
 
             let timer = setTimeout(() => {
-                console.log("called");
                 getPlaces()
-            }, 800)
+            }, 400)
 
             return () => clearInterval(timer)
         }
@@ -54,7 +55,7 @@ export const DataContextProvider = ({ children }) => {
         <DataContext.Provider value={{
             query, setQuery, getPlaces, getWeatherInfo, weatherInfo, setWeatherInfo,
             searchResults, setSearchResults,
-            theme, setTheme
+            theme, setTheme 
         }} >
             {children}
         </DataContext.Provider>

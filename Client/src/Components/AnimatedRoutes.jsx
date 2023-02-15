@@ -16,7 +16,7 @@ export default function AnimatedRoutes() {
     return (
         <>
             <NavBar />
-            <Search />
+            {location.pathname === "/" && <Search />}
 
             <AnimatePresence>
 

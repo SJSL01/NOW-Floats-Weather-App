@@ -4,7 +4,6 @@ export const getWeather = async (coords) => {
 
     try {
         const res = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${coords[0]}&lon=${coords[1]}&appid=c91077cdda12ca7d2b729448100d3311&units=metric`)
-        console.log(res.data)
         return res.data
     } catch (error) {
         console.log(error.message)

@@ -56,3 +56,10 @@
         width: 80vw;
     }
 }
+@media only screen and (width<900px) {
+
+    .cardDark,
+    .cardLight {
+        width: 60vw;
+    }
+}
