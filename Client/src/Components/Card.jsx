@@ -53,7 +53,7 @@ export default function Card({ weatherInfo, handleFav }) {
                         <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
 
 
-                            <img src={localStorage.getItem(weatherInfo.name) ? redHeart : whiteHeart}
+                            <img style={{backgroundColor:"#212121",borderRadius:"50%",padding:"0.2rem"}} src={localStorage.getItem(weatherInfo.name) ? redHeart : whiteHeart}
                                 onClick={() => { Savefav() }} />
 
 
